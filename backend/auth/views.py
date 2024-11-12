@@ -40,7 +40,7 @@ def login():
         try:
             user: User = auth_srv.get_user_by_email(form.email.data)
             if user.check_password(form.password.data):
-                login_user(user, remember=form.remember_me.data)
+                login_user(user, remember=True)
                 return redirect("/auth/profile")
             return render_template(prefix + '/login.html', message="Неправильный логин или пароль", form=form)
         except UserDoesNotExistError:

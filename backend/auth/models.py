@@ -4,7 +4,7 @@ from typing import Optional
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from db_session import SqlAlchemyBase
-from sqlalchemy import String, TIMESTAMP
+from sqlalchemy import String, TIMESTAMP, Boolean
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -26,6 +26,8 @@ class User(SqlAlchemyBase, UserMixin):
     surname: Mapped[str] = mapped_column(String)
     email: Mapped[str] = mapped_column(String, index=True, unique=True)
     hashed_password: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+    is_barista: Mapped[bool] = mapped_column(Boolean, default=False)
+    is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
     created_date: Mapped[datetime] = mapped_column(TIMESTAMP, default=datetime.now)
 
     def set_password(self, password: str) -> None:

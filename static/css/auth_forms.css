@@ -1,0 +1,14 @@
+.auth-form {
+    width: 40%;
+    padding: 2rem;
+    margin: 12rem 30%;
+    background: var(--color-cream);
+}
+
+body {
+    background: var(--color-brown) !important;
+}
+
+.register-a {
+    color: var(--color-brown);
+}

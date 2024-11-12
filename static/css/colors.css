@@ -1,0 +1,10 @@
+:root {
+    --color-brown: #825e5c;
+    --color-light-brown: #e3ba8f;
+    --color-cream: #f4ede4;
+    --color-white: #ffffff;
+}
+
+body {
+    background: var(--color-cream);
+}

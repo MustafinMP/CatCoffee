@@ -10,29 +10,6 @@ blueprint = Blueprint('auth', __name__)
 prefix = '/auth'
 
 
-@blueprint.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm()
-    if form.validate_on_submit():
-        if form.password.data != form.password_again.data:
-            return render_template(
-                prefix + '/register.html',
-                title='Регистрация',
-                form=form,
-                message="Пароли не совпадают"
-            )
-        if auth_srv.user_exists_by_email(form.email.data):
-            return render_template(
-                prefix + '/register.html',
-                title='Регистрация',
-                form=form,
-                message="Такой пользователь уже есть"
-            )
-        auth_srv.add_user(form)
-        return redirect(prefix + '/login')
-    return render_template(prefix + '/register.html', title='Регистрация', form=form)
-
-
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()

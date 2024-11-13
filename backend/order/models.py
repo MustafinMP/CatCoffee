@@ -13,18 +13,9 @@ class Order(SqlAlchemyBase):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     barista_id: Mapped[int] = mapped_column(ForeignKey('employee.id'))
     date: Mapped[date] = mapped_column(Date, default=date.today)
-    status_id: Mapped[int] = mapped_column(ForeignKey('status.id'))
+    status: Mapped[int] = mapped_column(String)
     payment_method: Mapped[str] = mapped_column(String)
-    amount: Mapped[Optional[int]] = mapped_column(nullable=True)
-
-    status = relationship('Status', foreign_keys=[status_id])
-
-
-class Status(SqlAlchemyBase):
-    __tablename__ = 'status'
-
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String)
+    amount: Mapped[Optional[int]] = mapped_column(nullable=True, default=0)
 
 
 class Position(SqlAlchemyBase):

@@ -9,7 +9,7 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-class User(SqlAlchemyBase, UserMixin):
+class Employee(SqlAlchemyBase, UserMixin):
     """Main user model.
 
     :param id: the unique user identification key.
@@ -19,12 +19,12 @@ class User(SqlAlchemyBase, UserMixin):
     :param created_date: the date, when user was benn created.
     """
 
-    __tablename__ = 'user'
+    __tablename__ = 'employee'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String)
-    surname: Mapped[str] = mapped_column(String)
+    full_name: Mapped[str] = mapped_column(String)
     email: Mapped[str] = mapped_column(String, index=True, unique=True)
+    # phone: Mapped[str] = mapped_column(String)
     hashed_password: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     is_barista: Mapped[bool] = mapped_column(Boolean, default=False)
     is_admin: Mapped[bool] = mapped_column(Boolean, default=False)

@@ -1,0 +1,20 @@
+.header-navbar {
+    background: var(--color-blue);
+    padding-right: 3rem;
+}
+
+.header-navbar nav {
+    display: grid;
+    grid-template-columns: 2fr 2fr 8fr;
+}
+
+.navbar-item {
+    padding: 1rem 2rem;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+}
+
+.navbar-item:hover {
+    background: var(--color-strong-blue);
+}

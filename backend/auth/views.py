@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, current_user
 
 from auth.exceptions import UserDoesNotExistError
 from auth.forms import LoginForm, RegisterForm
-from auth.models import User
+from auth.models import Employee
 import auth.service as auth_srv
 
 blueprint = Blueprint('auth', __name__)
@@ -38,7 +38,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         try:
-            user: User = auth_srv.get_user_by_email(form.email.data)
+            user: Employee = auth_srv.get_user_by_email(form.email.data)
             if user.check_password(form.password.data):
                 login_user(user, remember=True)
                 return redirect("/auth/profile")
@@ -58,5 +58,5 @@ def logout():
 @blueprint.route('/profile')
 def profile():
     if not current_user.is_authenticated:
-        return redirect('/auth/login')
+        return redirect('/order/all')
     return render_template(prefix + '/profile.html')

@@ -2,13 +2,13 @@
     width: 40%;
     padding: 2rem;
     margin: 12rem 30%;
-    background: var(--color-cream);
+    background: var(--color-white);
 }
 
 body {
-    background: var(--color-brown) !important;
+    background: var(--color-blue) !important;
 }
 
 .register-a {
-    color: var(--color-brown);
+    color: var(--color-blue);
 }

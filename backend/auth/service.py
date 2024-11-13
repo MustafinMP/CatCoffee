@@ -1,11 +1,11 @@
 import db_session
 from auth.exceptions import UserDoesNotExistError
 from auth.forms import RegisterForm
-from auth.models import User
-from auth.repository import UserRepository
+from auth.models import Employee
+from auth.repository import EmployeeRepository
 
 
-def get_user_by_id(user_id: int) -> User | None:
+def get_user_by_id(user_id: int) -> Employee | None:
     """Find user in database by id.
 
     :param user_id: the id of the user.
@@ -13,11 +13,11 @@ def get_user_by_id(user_id: int) -> User | None:
     """
 
     with db_session.create_session() as session:
-        repository = UserRepository(session)
+        repository = EmployeeRepository(session)
         return repository.get_by_id(user_id)
 
 
-def get_user_by_email(user_email: str) -> User | None:
+def get_user_by_email(user_email: str) -> Employee | None:
     """Find user in database by email.
 
     :param user_email: the email of the user.
@@ -25,7 +25,7 @@ def get_user_by_email(user_email: str) -> User | None:
     """
 
     with db_session.create_session() as session:
-        repository = UserRepository(session)
+        repository = EmployeeRepository(session)
         user = repository.get_by_email(user_email)
         if not user:
             raise UserDoesNotExistError
@@ -53,7 +53,7 @@ def add_user(form: RegisterForm) -> None:
     """
 
     with db_session.create_session() as session:
-        user_repository = UserRepository(session)
+        user_repository = EmployeeRepository(session)
         user = user_repository.add(
             form.name.data,
             form.surname.data,

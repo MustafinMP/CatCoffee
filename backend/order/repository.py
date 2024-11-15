@@ -59,6 +59,12 @@ class OrderRepository:
             self.session.add(position)
         self.session.commit()
 
+    def update_amount(self, order_id, amount):
+        order = self.get_by_id(order_id)
+        order.amount += amount
+        self.session.merge(order)
+        self.session.commit()
+
     def remove_position(self, order_id: int, product_id: int, count: int = 1):
         stmt = select(Position).where(
             and_(
@@ -83,3 +89,7 @@ class ProductRepository:
     def get_all(self) -> list[Product]:
         stmt = select(Product)
         return self.session.scalars(stmt).unique().all()
+
+    def get_by_id(self, product_id):
+        stmt = select(Product).where(Product.id == product_id)
+        return self.session.scalar(stmt)

@@ -16,7 +16,7 @@
 
 .order-item {
     display: grid;
-    grid-template-columns: 1fr 9fr 9fr 6fr;
+    grid-template-columns: 1fr 9fr 9fr 6fr 2fr;
     margin: 1rem;
     border-bottom: 1px solid white;
 }

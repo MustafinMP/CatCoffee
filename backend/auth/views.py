@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template
+from flask import Blueprint, redirect, render_template, url_for
 from flask_login import login_user, logout_user, current_user
 
 from auth.exceptions import UserDoesNotExistError
@@ -18,7 +18,7 @@ def login():
             user: Employee = auth_srv.get_user_by_email(form.email.data)
             if user.check_password(form.password.data):
                 login_user(user, remember=True)
-                return redirect("/auth/profile")
+                return redirect(url_for('order.orders'))
             return render_template(prefix + '/login.html', message="Неправильный логин или пароль", form=form)
         except UserDoesNotExistError:
             return render_template(prefix + '/login.html', message="Неправильный логин или пароль", form=form)
@@ -30,10 +30,3 @@ def logout():
     if current_user.is_authenticated:
         logout_user()
     return redirect("/")
-
-
-@blueprint.route('/profile')
-def profile():
-    if not current_user.is_authenticated:
-        return redirect('/order/all')
-    return render_template(prefix + '/profile.html')

@@ -27,7 +27,9 @@ app.register_blueprint(blueprint_order, url_prefix=prefix_order)
 
 @app.route('/')
 def index():
-    return 'Hello world'
+    if current_user.is_authenticated:
+        return redirect(url_for('order.orders'))
+    return redirect(url_for('auth.login'))
 
 
 @app.errorhandler(404)

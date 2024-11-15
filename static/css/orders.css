@@ -9,7 +9,7 @@
 
 .order-header {
     display: grid;
-    grid-template-columns: 2fr 2fr 2fr 4fr;
+    grid-template-columns: 2fr 2fr 3fr 4fr 4fr;
     background: var(--color-blue);
     padding: 1.2rem 2rem;
 }

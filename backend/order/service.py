@@ -32,3 +32,9 @@ def add_position_to_order(order_id, product_id):
     with db_session.create_session() as session:
         repository = OrderRepository(session)
         repository.add_position(order_id, product_id)
+
+
+def change_order_status(order_id, new_status_id):
+    with db_session.create_session() as session:
+        repository = OrderRepository(session)
+        repository.set_status(order_id, new_status_id)

@@ -25,7 +25,7 @@ class OrderRepository:
         order.barista_id = barista_id
         order.client_name = client_name
         order.payment_method = 'Наличными' if is_payment_method_cash else 'По карте'
-        order.status = statuses[status_id]
+        order.status = status_id
         self.session.add(order)
         self.session.commit()
         return order.id
@@ -36,7 +36,7 @@ class OrderRepository:
 
     def set_status(self, order_id, new_status_id: int):
         order = self.get_by_id(order_id)
-        order.status = statuses[new_status_id]
+        order.status = new_status_id
         self.session.merge(order)
         self.session.commit()
 

@@ -35,8 +35,8 @@
         {% endif %}
     </article>
     <article class="edit-order-products">
+        <h3 class="product-header">Десерты</h3>
         <article class="edit-order-product-group">
-            <h3 class="product-header">Десерты</h3>
             {% for product in products %}
             {% if product.type == 'Десерт' %}
             <a class="product" href="/order/add/{{ order.id }}/{{ product.id }}">
@@ -45,8 +45,8 @@
             {% endif %}
             {% endfor %}
         </article>
+        <h3 class="product-header">Напитки</h3>
         <article class="edit-order-product-group">
-            <h3 class="product-header">Напитки</h3>
             {% for product in products %}
             {% if product.type == 'Напиток' %}
             <a class="product" href="/order/add/{{ order.id }}/{{ product.id }}">

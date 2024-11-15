@@ -13,7 +13,7 @@
 }
 
 .product {
-    display: block;
+    display: inline-block;
     background: white;
     text-decoration: none;
     text-align: center;
@@ -22,5 +22,8 @@
     color: black;
     width: 12rem;
     height: 6rem;
+}
 
+.edit-order-product-group {
+    display: inline-block;
 }

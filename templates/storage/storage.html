@@ -1,0 +1,18 @@
+{% extends "basic_template_with_navbar.html" %}
+
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/storage.css') }}">
+{% endblock %}
+
+{% block content %}
+<article class="product-row" style="background: var(--color-light-blue);">
+    <p>Продукт</p>
+    <p>Количество на складе</p>
+</article>
+{% for product in products %}
+<a class="product-row" href="add/{{ product.id }}">
+    <p>{{ product.name }}</p>
+    <p>{{ product.count_in_storage }}</p>
+</a>
+{% endfor %}
+{% endblock %}

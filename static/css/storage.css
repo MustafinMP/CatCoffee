@@ -1,0 +1,8 @@
+.product-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    border-bottom: var(--color-light-blue) 1px solid;
+    text-decoration: none;
+    color: black;
+    padding-top: 1rem;
+}

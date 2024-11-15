@@ -90,6 +90,10 @@ class ProductRepository:
         stmt = select(Product)
         return self.session.scalars(stmt).unique().all()
 
+    def get_all_exist(self) -> list[Product]:
+        stmt = select(Product).where(Product.count_in_storage > 0)
+        return self.session.scalars(stmt).unique().all()
+
     def get_by_id(self, product_id):
         stmt = select(Product).where(Product.id == product_id)
         return self.session.scalar(stmt)
@@ -100,4 +104,13 @@ class ProductRepository:
         product.type = product_type
         product.amount = amount
         self.session.add(product)
+        self.session.commit()
+
+    def change_count(self, product_id, count: int = 1, from_storage: bool = True):
+        product = self.get_by_id(product_id)
+        if from_storage:
+            product.count_in_storage -= count
+        else:
+            product.count_in_storage += count
+        self.session.merge(product)
         self.session.commit()

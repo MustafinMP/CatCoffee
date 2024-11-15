@@ -22,6 +22,12 @@ def get_all_products():
         return repository.get_all()
 
 
+def get_exist_products():
+    with db_session.create_session() as session:
+        repository = ProductRepository(session)
+        return repository.get_all_exist()
+
+
 def get_order(order_id):
     with db_session.create_session() as session:
         repository = OrderRepository(session)
@@ -34,7 +40,9 @@ def add_position_to_order(order_id, product_id):
         order_repository.add_position(order_id, product_id)
         product_repository = ProductRepository(session)
         product = product_repository.get_by_id(product_id)
-        order_repository.update_amount(order_id, product.amount)
+        if product.count_in_storage > 0:
+            order_repository.update_amount(order_id, product.amount)
+            product_repository.change_count(product_id)
 
 
 def change_order_status(order_id, new_status_id):
@@ -47,3 +55,15 @@ def add_product(name, product_type, amount):
     with db_session.create_session() as session:
         repository = ProductRepository(session)
         repository.add(name, product_type, amount)
+
+
+def get_product_by_id(product_id):
+    with db_session.create_session() as session:
+        repository = ProductRepository(session)
+        return repository.get_by_id(product_id)
+
+
+def add_product_to_storage(product_id, count):
+    with db_session.create_session() as session:
+        repository = ProductRepository(session)
+        repository.change_count(product_id, count, from_storage=False)

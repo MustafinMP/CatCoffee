@@ -28,6 +28,7 @@ class Product(SqlAlchemyBase):
     type: Mapped[str] = mapped_column(String)
     name: Mapped[str] = mapped_column(String)
     amount: Mapped[int] = mapped_column()
+    count_in_storage: Mapped[int] = mapped_column(default=0)
 
 
 class Position(SqlAlchemyBase):

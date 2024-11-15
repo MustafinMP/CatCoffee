@@ -41,3 +41,9 @@ def change_order_status(order_id, new_status_id):
     with db_session.create_session() as session:
         repository = OrderRepository(session)
         repository.set_status(order_id, new_status_id)
+
+
+def add_product(name, product_type, amount):
+    with db_session.create_session() as session:
+        repository = ProductRepository(session)
+        repository.add(name, product_type, amount)

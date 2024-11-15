@@ -93,3 +93,11 @@ class ProductRepository:
     def get_by_id(self, product_id):
         stmt = select(Product).where(Product.id == product_id)
         return self.session.scalar(stmt)
+
+    def add(self, name, product_type, amount):
+        product = Product()
+        product.name = name
+        product.type = product_type
+        product.amount = amount
+        self.session.add(product)
+        self.session.commit()

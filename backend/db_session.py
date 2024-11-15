@@ -26,7 +26,7 @@ def global_init() -> None:
     engine = sa.create_engine(DATABASE_URL, echo=False)
     __factory = orm.sessionmaker(bind=engine)
 
-    from auth.models import User
+    from auth.models import Employee
     SqlAlchemyBase.metadata.create_all(engine)
 
 

@@ -1,0 +1,72 @@
+.edit-order {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.edit-order-products {
+    background: var(--color-light-blue);
+}
+
+.product-header {
+    display: block;
+    padding: 1rem;
+}
+
+.product {
+    display: inline-block;
+    background: white;
+    text-decoration: none;
+    text-align: center;
+    margin: 1rem;
+    padding: 1.5rem;
+    color: black;
+    width: 12rem;
+    height: 6rem;
+}
+
+.edit-order-product-group {
+    display: inline-block;
+}
+
+.dropbtn {
+    width: 6rem;
+    height: 2rem;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+/* Контейнер для выпадающего списка */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Скрытый контент выпадающего списка */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    opacity: 0;
+    animation: fadeIn 0.5s;
+}
+
+/* Стили для ссылок внутри выпадающего списка */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+}

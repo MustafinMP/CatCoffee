@@ -1,11 +1,5 @@
-import os
-
-from dotenv import load_dotenv
-
-load_dotenv()
-
-SECRET_KEY = os.environ.get('SECRET_KEY')
-DB_NAME = os.environ.get('DB_NAME')
+SECRET_KEY = 'place_for_secret_key'
+DB_NAME = 'db/coffee.sqlite'
 
 HOST = 'localhost'
 

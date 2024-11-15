@@ -3,6 +3,7 @@ from flask_login import LoginManager, current_user
 
 from auth.service import get_user_by_id
 from auth.views import blueprint as blueprint_auth, prefix as prefix_auth
+from order.views import blueprint as blueprint_order, prefix as prefix_order
 
 from config import SECRET_KEY, HOST
 import db_session
@@ -21,11 +22,14 @@ def load_user(user_id):
 
 
 app.register_blueprint(blueprint_auth, url_prefix=prefix_auth)
+app.register_blueprint(blueprint_order, url_prefix=prefix_order)
 
 
 @app.route('/')
 def index():
-    return 'Hello world'
+    if current_user.is_authenticated:
+        return redirect(url_for('order.orders'))
+    return redirect(url_for('auth.login'))
 
 
 @app.errorhandler(404)

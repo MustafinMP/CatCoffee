@@ -2,51 +2,43 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from auth.exceptions import UserIsAlreadyExistsError
-from auth.models import User
+from auth.models import Employee
 
 
-class UserRepository:
+class EmployeeRepository:
     def __init__(self, session: Session):
         self.session: Session = session
 
-    def get_by_id(self, user_id: int) -> User | None:
+    def get_by_id(self, user_id: int) -> Employee | None:
         """Find user in database by id.
 
         :param user_id: the id of the user.
         :return: user object or none.
         """
 
-        stmt = select(User).where(User.id == user_id)
+        stmt = select(Employee).where(Employee.id == user_id)
         return self.session.scalar(stmt)
 
-    def get_by_email(self, user_email: str) -> User | None:
+    def get_by_email(self, emlpoyee_email: str) -> Employee | None:
         """Find user in database by email.
 
-        :param user_email: the email of the user.
+        :param emlpoyee_email: the email of the user.
         :return: user object or none.
         """
 
-        stmt = select(User).where(User.email == user_email)
+        stmt = select(Employee).where(Employee.email == emlpoyee_email)
         return self.session.scalar(stmt)
 
-    def add(self, name: str, surname: str, email: str, password: str) -> User:
-        """Create new user by data from register form.
-
-        :param surname:
-        :param name:
-        :param email:
-        :param password:
-        :return: no return.
-        """
-
+    def add(self, name: str, email: str, password: str, is_barista: bool = True, is_admin: bool = False) -> Employee:
         if self.get_by_email(email) is not None:
             raise UserIsAlreadyExistsError
 
-        user = User()
-        user.name = name
-        user.surname = surname
-        user.email = email
-        user.set_password(password)
-        self.session.add(user)
+        employee = Employee()
+        employee.full_name = name
+        employee.email = email
+        employee.set_password(password)
+        employee.is_barista = is_barista
+        employee.is_admin = is_admin
+        self.session.add(employee)
         self.session.commit()
-        return user
+        return employee

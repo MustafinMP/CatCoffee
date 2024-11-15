@@ -1,0 +1,115 @@
+{% extends "basic_template_with_navbar.html" %}
+
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/edit_order.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='/css/orders.css') }}">
+{% endblock %}
+
+{% block content %}
+{% if order.status == 0 %}
+<section class="edit-order">
+    <article class="edit-order-content">
+        <div class="order-header">
+            <h6>Заказ №{{ order.id }}</h6>
+            <h6>{{ order.date }}</h6>
+            <h6>Имя клиента: {{ order.client_name }}</h6>
+            <h6>Статус:
+                <div class="dropdown">
+                    <button id="dropbtn-main" class="dropbtn">{{ statuses[order.status] }}</button>
+                    <div class="dropdown-content">
+                        {% for s_id, s_name in statuses.items() %}
+                        <a href="/order/change-status/{{ order.id }}/{{ s_id }}">{{ s_name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </h6>
+        </div>
+        {% if order.positions %}
+        <div class="order-item">
+            <p>№</p>
+            <p>Позиция</p>
+            <p>Тип позиции</p>
+            <p>Количество единиц</p>
+            <p>Стоимость</p>
+        </div>
+        {% for position in order.positions %}
+        <div class="order-item">
+            <p>{{ loop.index }}</p>
+            <p>{{ position.product.name }}</p>
+            <p>{{ position.product.type }}</p>
+            <p>{{ position.count }} шт.</p>
+            <p>{{ position.count * position.product.amount }} руб.</p>
+        </div>
+        {% endfor %}
+        <div class="order-item" style="background-color: var(--color-light-blue); padding-top: 1rem;">
+            <p></p>
+            <p></p>
+            <p></p>
+            <p>Итого:</p>
+            <p>{{ order.amount }} руб.</p>
+        </div>
+        {% else %}
+        <p>Нет выбранных позиций</p>
+        {% endif %}
+    </article>
+    <article class="edit-order-products">
+        <h3 class="product-header">Десерты</h3>
+        <article class="edit-order-product-group">
+            {% for product in products %}
+            {% if product.type == 'Десерт' %}
+            <a class="product" href="/order/add/{{ order.id }}/{{ product.id }}">
+                {{ product.name }}
+            </a>
+            {% endif %}
+            {% endfor %}
+        </article>
+        <h3 class="product-header">Напитки</h3>
+        <article class="edit-order-product-group">
+            {% for product in products %}
+            {% if product.type == 'Напиток' %}
+            <a class="product" href="/order/add/{{ order.id }}/{{ product.id }}">
+                {{ product.name }}
+            </a>
+            {% endif %}
+            {% endfor %}
+        </article>
+    </article>
+</section>
+{% else %}
+<article class="edit-order-content">
+    <div class="order-header">
+        <h6>Заказ №{{ order.id }}</h6>
+        <h6>{{ order.date }}</h6>
+        <h6>Имя клиента: {{ order.client_name }}</h6>
+        <h6>Статус:
+            <div class="dropdown">
+                <button id="dropbtn-main" class="dropbtn">{{ statuses[order.status] }}</button>
+                <div class="dropdown-content">
+                    {% for s_id, s_name in statuses.items() %}
+                    <a href="/order/change-status/{{ order.id }}/{{ s_id }}">{{ s_name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </h6>
+    </div>
+    {% if order.positions %}
+    <div class="order-item">
+        <p>№</p>
+        <p>Позиция</p>
+        <p>Тип позиции</p>
+        <p>Количество единиц</p>
+    </div>
+    {% for position in order.positions %}
+    <div class="order-item">
+        <p>{{ loop.index }}</p>
+        <p>{{ position.product.name }}</p>
+        <p>{{ position.product.type }}</p>
+        <p>{{ position.count }} шт.</p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Нет выбранных позиций</p>
+    {% endif %}
+</article>
+{% endif %}
+{% endblock %}

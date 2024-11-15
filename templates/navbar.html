@@ -1,12 +1,12 @@
-<aside class="aside-navbar">
+<header class="header-navbar">
     <nav>
-        <a id="aside-navbar-profile" href="{{ url_for('auth.profile') }}" class="navbar-item">
-            <i class="bi bi-person-circle"></i>
-            <div class="">Профиль</div>
+        <a id="navbar-new-order" href="{{ url_for('order.new_order') }}" class="navbar-item">
+            <i class="bi bi-plus-lg"></i>
+            <div class="">Новый заказ</div>
         </a>
-        <a id="aside-navbar-logout" href="{{ url_for('auth.logout') }}" class="navbar-item">
-            <i class="bi bi-box-arrow-left"></i>
-            <div class="">Выйти из системы</div>
+        <a id="navbar-orders" href="{{ url_for('order.orders') }}" class="navbar-item">
+            <i class="bi bi-list-task"></i>
+            <div class="">Заказы</div>
         </a>
     </nav>
-</aside>
+</header>

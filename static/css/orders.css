@@ -1,0 +1,22 @@
+.order {
+    display: block;
+    margin: 2rem;
+    background: var(--color-light-blue);
+    text-decoration: none;
+    color: black;
+    width: 70%;
+}
+
+.order-header {
+    display: grid;
+    grid-template-columns: 2fr 2fr 3fr 4fr 4fr;
+    background: var(--color-blue);
+    padding: 1.2rem 2rem;
+}
+
+.order-item {
+    display: grid;
+    grid-template-columns: 1fr 9fr 9fr 6fr 2fr;
+    margin: 1rem;
+    border-bottom: 1px solid white;
+}
